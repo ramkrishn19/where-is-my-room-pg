@@ -6,648 +6,147 @@
 <meta name="theme-color" content="#2563eb">
 <title>Where Is My Room / PG</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
-header{background:#2563eb;color:#fff;padding:18px 16px;position:sticky;top:0;z-index:5}
-h1{font-size:22px;margin:0 0 5px}.sub{font-size:13px;opacity:.9}
-main{max-width:760px;margin:auto;padding:16px}
-.card{background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px #00000012}
-.search{width:100%;padding:13px;border:1px solid #ccd5e1;border-radius:10px;font-size:16px}
-.btn{border:0;border-radius:10px;padding:13px 16px;font-size:15px;font-weight:700;cursor:pointer}
-.primary{background:#16a34a;color:#fff;width:100%;margin-top:10px}.blue{background:#2563eb;color:#fff}
-.hidden{display:none!important}
-label{display:block;font-size:14px;font-weight:700;margin:12px 0 6px}
-input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.listing{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-top:10px}
-.title{font-size:18px;font-weight:700;margin-bottom:6px}.muted{color:#64748b;font-size:13px;line-height:1.5}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.actions a{flex:1;text-align:center;text-decoration:none}
-.cancel{background:#e2e8f0;color:#172033;width:100%;margin-top:8px}
-.small{font-size:12px;color:#64748b}
-@media(max-width:500px){.row{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#172033}
+header{background:#2563eb;color:#fff;padding:18px 16px;text-align:center;position:sticky;top:0;z-index:10}
+header h1{margin:0;font-size:22px}header p{margin:5px 0 0;font-size:13px}
+main{max-width:820px;margin:auto;padding:14px}.card{background:#fff;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #00000012}
+h2{margin:0 0 12px;font-size:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:block;font-size:13px;font-weight:700;margin:8px 0 5px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font-size:15px;background:#fff}
+textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
+button{border:0;border-radius:10px;padding:12px 14px;font-weight:700;font-size:15px;cursor:pointer}
+.primary{background:#16a34a;color:#fff}.blue{background:#2563eb;color:#fff}.dark{background:#172033;color:#fff}.gray{background:#e2e8f0;color:#172033}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.hidden{display:none!important}.small{font-size:12px;color:#64748b}
+#status{padding:10px;border-radius:10px;background:#eff6ff;color:#1e40af;margin:10px 0}
+.listing{border:1px solid #dbe3ef;border-radius:12px;padding:13px;margin:10px 0}.listing h3{margin:0 0 7px}.meta{font-size:13px;line-height:1.6}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#e0ecff;color:#1d4ed8;font-size:12px;font-weight:700;margin:2px}
+a.btn{display:inline-block;text-decoration:none;padding:9px 11px;border-radius:9px;background:#2563eb;color:#fff;font-weight:700;font-size:13px}
+.toprow{display:flex;justify-content:space-between;gap:8px;align-items:center}.count{font-weight:700}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Where Is My Room / PG</h1>
-  <div class="sub">Find Room / PG anywhere in India</div>
-</header>
-
+<header><h1>Where Is My Room / PG</h1><p>Find Room & PG anywhere in India</p></header>
 <main>
-  <section id="home">
-    <div class="card">
-      <div class="row" style="margin-bottom:10px">
-        <button id="clientMode" class="btn blue" type="button">👤 Find Room / PG</button>
-        <button id="ownerMode" class="btn blue" type="button">🔐 Owner Login</button>
-      </div>
-      <input id="search" class="search" placeholder="🔎 Search Room / PG, City, Area or PIN Code">
-      <button id="clearSearch" class="btn cancel" type="button" style="margin-top:8px">Clear Search</button>
-      <select id="searchState" class="search" style="margin-top:8px">
-        <option value="">All States</option>
-        <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
-        <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option>
-        <option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option>
-        <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
-        <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option>
-        <option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
-        <option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
-        <option>West Bengal</option><option>Delhi</option><option>Jammu and Kashmir</option><option>Ladakh</option>
-        <option>Puducherry</option><option>Chandigarh</option>
-      </select>
-      <div id="clientHint" class="small" style="margin-top:8px">👤 Client: Search Room / PG by name, city, area or PIN code.</div>
-      <button id="openAdd" class="btn primary" type="button">＋ Add Room / PG</button>
-    </div>
-    <div class="card">
-      <h3 style="margin-top:0">Room / PG Listings</h3><div id="firebaseStatus" class="small">Firebase: checking connection...</div><div id="appNotice" class="small" style="margin-top:6px"></div>
-      <div id="list"></div>
-    </div>
-  </section>
+<div id="status">Connecting to database…</div>
 
-
-
-  <section id="ownerAuth" class="card hidden">
-    <h2 style="margin-top:0">🔐 Owner Login</h2>
-    <p class="small">Login using your mobile number and OTP.</p>
-    <label>Owner Mobile Number</label>
-    <input id="ownerPhone" type="tel" inputmode="tel" required placeholder="+91 9876543210">
-    <button id="sendOtp" class="btn primary" type="button">Send OTP</button>
-    <div id="recaptcha-container"></div>
-    <div id="otpArea" class="hidden">
-      <label>OTP</label>
-      <input id="ownerOtp" type="tel" inputmode="numeric" maxlength="6" placeholder="Enter 6 digit OTP">
-      <button id="verifyOtp" class="btn blue" type="button" style="width:100%;margin-top:10px">Verify OTP & Login</button>
-    </div>
-    <button id="authBack" class="btn cancel" type="button">Back to Rooms</button>
-    <div id="authMessage" class="small" style="margin-top:8px"></div>
-  </section>
-
-  <section id="ownerPanel" class="card hidden">
-    <h2 style="margin-top:0">🏠 Owner Dashboard</h2>
-    <p class="small">You are logged in. Only listings created by your account can be edited or deleted.</p>
-    <div id="ownerAccount" class="small"></div>
-    <button id="loadOwnerListings" class="btn primary" type="button">My Listings</button>
-    <div id="ownerListings" style="margin-top:12px"></div>
-    <button id="ownerBack" class="btn cancel" type="button">Back to Rooms</button>
-  </section>
-
-  <section id="addForm" class="card hidden">
-    <h2 style="margin-top:0">Add Room / PG</h2>
-    <p class="small">Fill the details and tap Publish Listing.</p>
-    <form id="roomForm">
-      <label>Owner Name *</label>
-      <input id="owner" required placeholder="Owner name">
-
-      <label>Owner Mobile Number *</label>
-      <input id="mobile" required type="tel" inputmode="tel" placeholder="10 digit mobile number">
-
-      <label>State *</label>
-      <select id="state" required>
-        <option value="">Select State</option>
-        <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
-        <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option>
-        <option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option>
-        <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
-        <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option>
-        <option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
-        <option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
-        <option>West Bengal</option><option>Delhi</option><option>Jammu and Kashmir</option><option>Ladakh</option>
-        <option>Puducherry</option><option>Chandigarh</option>
-      </select>
-
-      <label>City *</label><input id="city" required placeholder="City">
-      <label>Area / PIN Code *</label><input id="area" required placeholder="Area or PIN Code">
-      <label>Room / PG Name *</label><input id="name" required placeholder="Room / PG name">
-
-      <div class="row">
-        <div><label>For</label><select id="gender"><option>Anyone</option><option>Boys</option><option>Girls</option></select></div>
-        <div><label>Sharing</label><select id="sharing"><option>Single</option><option>Double</option><option>Triple</option></select></div>
-      </div>
-
-      <label>Rent (Optional)</label><input id="rent" inputmode="numeric" placeholder="Example: 8000">
-
-      <label>Location / Address (Optional)</label><input id="location" placeholder="Full address / landmark">
-
-      <label>Google Maps Location (Optional)</label>
-<div style="display:flex;gap:8px;align-items:center">
-  <input id="map" type="url" placeholder="Paste Google Maps link" style="flex:1">
-  <button class="btn blue" type="button" onclick="openGoogleMaps()" style="white-space:nowrap;padding:12px 10px">📍 Select</button>
+<section class="card">
+<h2>Search Room / PG</h2>
+<div class="grid">
+<div><label>State</label><select id="searchState"><option value="">All States</option></select></div>
+<div><label>City / District</label><input id="searchCity" placeholder="City or District"></div>
+<div><label>Area / Block</label><input id="searchArea" placeholder="Area or Block"></div>
+<div><label>PIN Code</label><input id="searchPin" inputmode="numeric" maxlength="6" placeholder="6 digit PIN"></div>
 </div>
-<div class="small" style="margin-top:6px">Tap Select → choose/copy the location link from Google Maps → paste it above.</div>
+<div class="actions"><button class="blue" id="searchBtn">Search</button><button class="gray" id="clearSearch">Clear</button></div>
+</section>
 
-      <button class="btn primary" type="submit">Publish Listing</button>
-      <button id="cancel" class="btn cancel" type="button">Cancel</button>
-    </form>
-  </section>
+<section class="card">
+<div class="toprow"><h2>Available Rooms / PG</h2><span class="count" id="resultCount">0</span></div>
+<div id="listings">Loading…</div>
+</section>
+
+<section class="card">
+<h2>Owner Login</h2>
+<p class="small">Owner access uses Mobile Number + 6-digit PIN. No email and no OTP.</p>
+<div id="loginBox">
+<div class="grid">
+<div><label>Mobile Number</label><input id="loginMobile" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
+<div><label>6-digit PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="6" placeholder="6 digit PIN"></div>
+</div>
+<div class="actions"><button class="blue" id="loginBtn">Owner Login</button><button class="gray" id="showRegister">Create Owner Account</button></div>
+</div>
+
+<div id="registerBox" class="hidden">
+<div class="grid">
+<div><label>Owner Name</label><input id="regName" placeholder="Owner name"></div>
+<div><label>Mobile Number</label><input id="regMobile" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
+<div><label>6-digit PIN</label><input id="regPin" type="password" inputmode="numeric" maxlength="6" placeholder="6 digit PIN"></div>
+<div><label>Confirm PIN</label><input id="regPin2" type="password" inputmode="numeric" maxlength="6" placeholder="Confirm PIN"></div>
+</div>
+<div class="actions"><button class="primary" id="registerBtn">Create Account</button><button class="gray" id="backLogin">Back</button></div>
+</div>
+
+<div id="ownerPanel" class="hidden">
+<p><b id="ownerWelcome"></b></p>
+<div class="actions"><button class="primary" id="addBtn">＋ Add Room / PG</button><button class="gray" id="logoutBtn">Logout</button></div>
+</div>
+</section>
+
+<section id="addCard" class="card hidden">
+<h2>Add Room / PG</h2>
+<div class="grid">
+<div><label>Listing Type</label><select id="type"><option>Room</option><option>PG</option></select></div>
+<div><label>For</label><select id="forWho"><option>Anyone</option><option>Boys</option><option>Girls</option></select></div>
+<div><label>Sharing</label><select id="sharing"><option>Single</option><option>Double</option><option>Triple</option></select></div>
+<div><label>State</label><select id="state"></select></div>
+<div><label>City / District</label><input id="city" placeholder="City or District"></div>
+<div><label>Area / Block</label><input id="area" placeholder="Area or Block"></div>
+<div><label>PIN Code</label><input id="pin" inputmode="numeric" maxlength="6" placeholder="6 digit PIN"></div>
+<div><label>Google Location Link</label><input id="map" type="url" placeholder="Paste Google Maps link"></div>
+<div class="full"><label>Address / Details</label><textarea id="details" placeholder="Room/PG details"></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="saveBtn">Save Room / PG</button><button class="gray" id="cancelAdd">Cancel</button></div>
+</section>
 </main>
 
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-  import {
-    getAuth, onAuthStateChanged, RecaptchaVerifier,
-    signInWithPhoneNumber, signOut
-  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-  import {
-    getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc,
-    query, orderBy
-  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
-  // ============================================================
-  // PASTE YOUR FIREBASE WEB APP CONFIG HERE
-  // Firebase Console → Project settings → Your apps → Web app
-  // ============================================================
-  const firebaseConfig = {
-    apiKey: "AIzaSyD3nvPICve3_fo9ghXtNL99apumkkSaEh0",
-    authDomain: "where-is-my-room-ya-pg.firebaseapp.com",
-    projectId: "where-is-my-room-ya-pg",
-    storageBucket: "where-is-my-room-ya-pg.firebasestorage.app",
-    messagingSenderId: "941315065299",
-    appId: "1:941315065299:web:ba0066f9b1c41a6b049b26",
-    measurementId: "G-9NBM075XYK"
-  };
-
-  const ready = !Object.values(firebaseConfig).some(v =>
-    String(v).includes("PASTE_")
-  );
-
-  let db = null;
-
-  if (ready) {
-    try {
-      const app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      window.firebaseDB = db;
-      window.firebaseAuth = getAuth(app);
-      window.firebaseReady = true;
-    } catch (e) {
-      console.error("Firebase initialization failed:", e);
-      window.firebaseReady = false;
-    }
-  } else {
-    window.firebaseReady = false;
-  }
-
-  window.firebaseCollection = collection;
-  window.firebaseAddDoc = addDoc;
-  window.firebaseUpdateDoc = updateDoc;
-  window.firebaseDeleteDoc = deleteDoc;
-  window.firebaseDoc = doc;
-  window.firebaseGetDocs = getDocs;
-  window.firebaseQuery = query;
-  window.firebaseOrderBy = orderBy;
-  window.firebaseRecaptchaVerifier = RecaptchaVerifier;
-  window.firebaseSignInWithPhoneNumber = signInWithPhoneNumber;
-  window.firebaseSignOut = signOut;
-  window.firebaseOnAuthStateChanged = onAuthStateChanged;
-
-  window.firebaseOnAuthStateChanged = onAuthStateChanged;
-  if (window.firebaseReady && window.firebaseAuth) {
-    onAuthStateChanged(window.firebaseAuth, (user) => {
-      window.currentOwnerUser = user || null;
-      window.dispatchEvent(new Event("owner-auth-changed"));
-    });
-  }
-  window.dispatchEvent(new Event("firebase-ready"));
-</script>
-
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script>
-const KEY = "WIMRPG";
-const $ = id => document.getElementById(id);
-
-function getItems() {
-  try {
-    const data = JSON.parse(localStorage.getItem(KEY) || "[]");
-    return Array.isArray(data) ? data : [];
-  } catch (e) { return []; }
-}
-
-function saveItems(items) {
-  localStorage.setItem(KEY, JSON.stringify(items));
-}
-
-function showHome() {
-  $("addForm").classList.add("hidden");
-  $("ownerPanel").classList.add("hidden");
-  $("ownerAuth").classList.add("hidden");
-  $("home").classList.remove("hidden");
-  render();
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-function showAdd() {
-  if (!window.currentOwnerUser) {
-    showOwner();
-    return;
-  }
-  $("home").classList.add("hidden");
-  $("ownerPanel").classList.add("hidden");
-  $("addForm").classList.remove("hidden");
-  delete $("roomForm").dataset.editId;
-  const submitBtn = $("roomForm").querySelector('button[type="submit"]');
-  if (submitBtn) submitBtn.textContent = "Publish Listing";
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-function openGoogleMaps() {
-  window.open("https://www.google.com/maps", "_blank", "noopener,noreferrer");
-}
-
-function esc(s) {
-  return String(s ?? "").replace(/[&<>"']/g, m => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[m]));
-}
-
-async function loadFirebaseListings() {
-  if (!window.firebaseReady || !window.firebaseDB) return false;
-  try {
-    const q = window.firebaseQuery(
-      window.firebaseCollection(window.firebaseDB, "rooms"),
-      window.firebaseOrderBy("created", "desc")
-    );
-    const snap = await window.firebaseGetDocs(q);
-    const items = snap.docs.map(d => ({id:d.id, ...d.data()}));
-    saveItems(items);
-    render();
-    return true;
-  } catch (e) {
-    console.error("Firestore read failed:", e);
-    alert("Firebase data load failed. " + (e?.message || "Check Firestore Rules and configuration."));
-    return false;
-  }
-}
-
-async function publishToFirebase(item) {
-  if (!window.firebaseReady || !window.firebaseDB) return false;
-  try {
-    await window.firebaseAddDoc(
-      window.firebaseCollection(window.firebaseDB, "rooms"),
-      item
-    );
-    return true;
-  } catch (e) {
-    console.error("Firestore write failed:", e);
-    alert("Firebase save failed. " + (e?.message || "Check Firestore Rules and configuration."));
-    return false;
-  }
-}
-
-
-function showOwner() {
-  $("home").classList.add("hidden");
-  $("addForm").classList.add("hidden");
-  if (window.currentOwnerUser) {
-    $("ownerAuth").classList.add("hidden");
-    $("ownerPanel").classList.remove("hidden");
-    const account = $("ownerAccount");
-    if (account) account.textContent = "Logged in: " + (window.currentOwnerUser.phoneNumber || "");
-  } else {
-    $("ownerPanel").classList.add("hidden");
-    $("ownerAuth").classList.remove("hidden");
-  }
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-function ownerListings() {
-  const box = $("ownerListings");
-  if (!window.currentOwnerUser) {
-    showOwner();
-    return;
-  }
-
-  const uid = window.currentOwnerUser.uid;
-  const items = getItems().filter(x => x.ownerUid === uid);
-
-  if (!items.length) {
-    box.innerHTML = '<p class="muted">No listing found for this mobile number.</p>';
-    return;
-  }
-
-  box.innerHTML = items.map(x => `
-    <div class="listing">
-      <div class="title">${esc(x.name)}</div>
-      <div class="muted">${esc(x.city)}, ${esc(x.state)} · ${esc(x.area)}<br>
-      ${esc(x.gender)} · ${esc(x.sharing)}${x.rent ? " · Rent: ₹" + esc(x.rent) : ""}</div>
-      <div class="actions">
-        <button class="btn blue" type="button" onclick="editListing('${esc(x.id || "")}')">Edit</button>
-        <button class="btn cancel" type="button" onclick="deleteListing('${esc(x.id || "")}')">Delete</button>
-      </div>
-    </div>
-  `).join("");
-}
-
-async function deleteListing(id) {
-  if (!id) {
-    alert("This listing has no Firebase ID. Please refresh listings first.");
-    return;
-  }
-  if (!window.currentOwnerUser) {
-    alert("Please login as owner first.");
-    return;
-  }
-  const owned = getItems().find(x => x.id === id && x.ownerUid === window.currentOwnerUser.uid);
-  if (!owned) {
-    alert("You can only delete your own listing.");
-    return;
-  }
-  if (!confirm("Delete this Room / PG listing?")) return;
-
-  try {
-    await window.firebaseDeleteDoc(window.firebaseDoc(window.firebaseDB, "rooms", id));
-    await loadFirebaseListings();
-    ownerListings();
-    alert("Listing deleted successfully.");
-  } catch (e) {
-    console.error(e);
-    alert("Delete failed. Your Firestore Rules must allow owner delete.");
-  }
-}
-
-async function editListing(id) {
-  const item = getItems().find(x => x.id === id && window.currentOwnerUser && x.ownerUid === window.currentOwnerUser.uid);
-  if (!item) {
-    alert("Listing not found. Please refresh and try again.");
-    return;
-  }
-
-  $("owner").value = item.owner || "";
-  $("mobile").value = item.mobile || "";
-  $("state").value = item.state || "";
-  $("city").value = item.city || "";
-  $("area").value = item.area || "";
-  $("name").value = item.name || "";
-  $("gender").value = item.gender || "Anyone";
-  $("sharing").value = item.sharing || "Single";
-  $("rent").value = item.rent || "";
-  $("location").value = item.location || "";
-  $("map").value = item.map || "";
-
-  $("home").classList.add("hidden");
-  $("ownerPanel").classList.add("hidden");
-  $("addForm").classList.remove("hidden");
-
-  const form = $("roomForm");
-  form.dataset.editId = id;
-  const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = "Update Listing";
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-function render() {
-  const q = $("search").value.trim().toLowerCase();
-  const selectedState = $("searchState").value.trim().toLowerCase();
-  const box = $("list");
-  const arr = getItems();
-
-  const filtered = arr.filter(x => {
-    const state = String(x.state || "").trim().toLowerCase();
-    const searchable = [
-      x.city, x.area, x.name, x.location, x.rent, x.gender, x.sharing
-    ].map(v => String(v || "").toLowerCase()).join(" ");
-
-    const stateMatch = !selectedState || state === selectedState;
-    const textMatch = !q || searchable.some(v => String(v || "").toLowerCase().includes(q));
-
-    return stateMatch && textMatch;
-  });
-
-  if (!filtered.length) {
-    box.innerHTML =
-      '<p class="muted">No listings found. Tap “＋ Add Room / PG” to add the first listing.</p>';
-    return;
-  }
-
-  box.innerHTML = filtered.map(x => {
-    const phone = String(x.mobile || "").replace(/\D/g, "");
-    const wa = phone.length >= 10 ? "https://wa.me/" + phone : "";
-
-    return `<div class="listing">
-      <div class="title">${esc(x.name)}</div>
-      <div class="muted">
-        <b>${esc(x.gender)}</b> · ${esc(x.sharing)} · ${esc(x.city)}, ${esc(x.state)}<br>
-        ${esc(x.area)}${x.rent ? " · Rent: ₹" + esc(x.rent) : ""}<br>
-        Owner: ${esc(x.owner)} · ${esc(x.mobile)}
-        ${x.location ? "<br>" + esc(x.location) : ""}
-      </div>
-      <div class="actions">
-        <a class="btn blue" href="tel:${esc(phone)}">Call</a>
-        ${wa ? `<a class="btn blue" href="${esc(wa)}" target="_blank" rel="noopener noreferrer">WhatsApp</a>` : ""}
-        ${x.map ? `<a class="btn blue" href="${esc(x.map)}" target="_blank" rel="noopener noreferrer">📍 Open Location</a>` : ""}
-      </div>
-    </div>`;
-  }).join("");
-}
-
-function wireAppButtons() {
-  const openBtn = $("openAdd");
-  const clearSearch = $("clearSearch");
-  const cancelBtn = $("cancel");
-  const searchBox = $("search");
-
-  if (openBtn) openBtn.addEventListener("click", showAdd);
-  if (clearSearch) clearSearch.addEventListener("click", () => { $("search").value = ""; $("searchState").value = ""; render(); });
-  if (cancelBtn) cancelBtn.addEventListener("click", showHome);
-  if (searchBox) searchBox.addEventListener("input", render);
-  window.addEventListener("owner-auth-changed", () => {
-    if (window.currentOwnerUser) {
-      const account = $("ownerAccount");
-      if (account) account.textContent = "Logged in: " + (window.currentOwnerUser.phoneNumber || "");
-    }
-  });
-
-  const stateBox = $("searchState");
-  if (stateBox) stateBox.addEventListener("change", render);
-
-  const clientBtn = $("clientMode");
-  const ownerBtn = $("ownerMode");
-  const ownerLoad = $("loadOwnerListings");
-  const ownerBack = $("ownerBack");
-  if (clientBtn) clientBtn.addEventListener("click", showHome);
-  if (ownerBtn) ownerBtn.addEventListener("click", showOwner);
-  if (ownerLoad) ownerLoad.addEventListener("click", ownerListings);
-  if (ownerBack) ownerBack.addEventListener("click", showHome);
-
-  const authBack = $("authBack");
-  const sendOtp = $("sendOtp");
-  const verifyOtp = $("verifyOtp");
-
-  if (authBack) authBack.addEventListener("click", showHome);
-
-  if (sendOtp) sendOtp.addEventListener("click", async () => {
-    const phone = $("ownerPhone").value.trim();
-    const msg = $("authMessage");
-    try {
-      const normalized = phone.replace(/[-()\s]/g, "");
-      if (!/^\+91[6-9]\d{9}$/.test(normalized)) {
-        throw new Error("Please enter a valid Indian mobile number with +91.");
-      }
-      msg.textContent = "Sending OTP...";
-      if (!window.firebaseAuth) {
-        throw new Error("Firebase Authentication is not ready. Please refresh the page and try again.");
-      }
-
-      // Use a dedicated reCAPTCHA container so it is never rendered twice
-      // inside the Send OTP button.
-      if (window.phoneRecaptcha) {
-        try { window.phoneRecaptcha.clear(); } catch (_) {}
-        window.phoneRecaptcha = null;
-      }
-
-      window.phoneRecaptcha = new window.firebaseRecaptchaVerifier(
-        window.firebaseAuth,
-        "recaptcha-container",
-        {size: "invisible"}
-      );
-
-      await window.phoneRecaptcha.render();
-
-      window.confirmationResult = await window.firebaseSignInWithPhoneNumber(
-        window.firebaseAuth, normalized, window.phoneRecaptcha
-      );
-      $("otpArea").classList.remove("hidden");
-      msg.textContent = "OTP sent. Enter the OTP received on your mobile.";
-      sendOtp.textContent = "Resend OTP";
-    } catch (e) {
-      console.error(e);
-      msg.textContent = e.message || "OTP could not be sent.";
-      try { if (window.phoneRecaptcha) { window.phoneRecaptcha.clear(); window.phoneRecaptcha = null; } } catch (_) {}
-    }
-  });
-
-  if (verifyOtp) verifyOtp.addEventListener("click", async () => {
-    const otp = $("ownerOtp").value.trim();
-    const msg = $("authMessage");
-    try {
-      if (!window.confirmationResult) throw new Error("Please request OTP first.");
-      if (!/^\d{6}$/.test(otp)) throw new Error("Please enter the 6 digit OTP.");
-      msg.textContent = "Verifying OTP...";
-      await window.confirmationResult.confirm(otp);
-      msg.textContent = "Mobile number verified successfully.";
-      try { if (window.phoneRecaptcha) { window.phoneRecaptcha.clear(); window.phoneRecaptcha = null; } } catch (_) {}
-      showOwner();
-    } catch (e) {
-      console.error(e);
-      msg.textContent = e.message || "OTP verification failed.";
-    }
-  });
-}
-
-wireAppButtons();
-
-$("roomForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  if (!window.currentOwnerUser) {
-    alert("Please login/create an Owner account before publishing a listing.");
-    showOwner();
-    return;
-  }
-
-  const mobile = $("mobile").value.replace(/\D/g, "");
-  if (mobile.length !== 10) {
-    alert("Please enter a valid 10 digit mobile number.");
-    $("mobile").focus();
-    return;
-  }
-
-  for (const id of ["owner","mobile","state","city","area","name"]) {
-    if (!$(`${id}`).value.trim()) {
-      $(`${id}`).focus();
-      alert("Please fill all required (*) fields.");
-      return;
-    }
-  }
-
-  const map = $("map").value.trim();
-  if (map && !/^https?:\/\/.+/i.test(map)) {
-    alert("Please paste a valid Google Maps link.");
-    $("map").focus();
-    return;
-  }
-
-  const item = {
-    ownerUid: window.currentOwnerUser ? window.currentOwnerUser.uid : "",
-    owner: $("owner").value.trim(),
-    mobile,
-    state: $("state").value,
-    city: $("city").value.trim(),
-    area: $("area").value.trim(),
-    name: $("name").value.trim(),
-    gender: $("gender").value,
-    sharing: $("sharing").value,
-    rent: $("rent").value.trim(),
-    location: $("location").value.trim(),
-    map,
-    created: Date.now()
-  };
-
-  const btn = this.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.textContent = "Publishing...";
-
-  if (!window.firebaseReady) {
-    btn.disabled = false;
-    btn.textContent = "Publish Listing";
-    alert("Firebase is not configured yet. Paste your Firebase Web App config into the HTML first.");
-    return;
-  }
-
-  let ok = false;
-  const editId = this.dataset.editId;
-
-  if (editId) {
-    try {
-      await window.firebaseUpdateDoc(
-        window.firebaseDoc(window.firebaseDB, "rooms", editId),
-        item
-      );
-      ok = true;
-    } catch (e) {
-      console.error("Firestore update failed:", e);
-      alert("Update failed. Your Firestore Rules must allow owner update.");
-    }
-  } else {
-    ok = await publishToFirebase(item);
-  }
-
-  if (ok) {
-    this.reset();
-    delete this.dataset.editId;
-    await loadFirebaseListings();
-    alert(editId ? "Room / PG listing updated successfully!" : "Room / PG listing published successfully to Firebase!");
-    showHome();
-  }
-
-  btn.disabled = false;
-  btn.textContent = "Publish Listing";
-});
-
-window.addEventListener("firebase-ready", async () => {
-  if (window.firebaseReady) {
-    await loadFirebaseListings();
-  } else {
-    render();
-  }
-});
-
-render();
+const firebaseConfig={
+ apiKey:"AIzaSyD3nvPICve3_fo9ghXtNL99apumkkSaEh0",
+ authDomain:"where-is-my-room-ya-pg.firebaseapp.com",
+ projectId:"where-is-my-room-ya-pg",
+ storageBucket:"where-is-my-room-ya-pg.firebasestorage.app",
+ messagingSenderId:"941315065299",
+ appId:"1:941315065299:web:ba0066f9b1c41a6b049b26",
+ measurementId:"G-9NBM075XYK"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+const states=["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry"];
+const $=id=>document.getElementById(id);
+function fillStates(sel){states.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;sel.appendChild(o)})}
+fillStates($("searchState"));fillStates($("state"));
+function cleanMobile(v){return(v||"").replace(/\D/g,"").slice(-10)}
+function validPin(v){return/^\d{6}$/.test(v)}
+async function sha256(text){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(text));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+function setStatus(msg,err=false){$("status").textContent=msg;$("status").style.background=err?"#fef2f2":"#eff6ff";$("status").style.color=err?"#991b1b":"#1e40af"}
+let allListings=[],owner=null;
+async function loadListings(){
+try{const snap=await db.collection("listings").orderBy("createdAt","desc").get();allListings=snap.docs.map(d=>({id:d.id,...d.data()}));renderListings();setStatus("Online database connected.")}
+catch(e){setStatus("Database error: "+e.message,true);$("listings").innerHTML="<p>Listings could not be loaded. Check Firestore rules.</p>"}}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function safeUrl(v){try{const u=new URL(v);return/^https?:$/.test(u.protocol)?u.href:"#"}catch{return"#"}}
+function renderListings(){
+const st=$("searchState").value.toLowerCase(),city=$("searchCity").value.trim().toLowerCase(),area=$("searchArea").value.trim().toLowerCase(),pin=$("searchPin").value.trim();
+const rows=allListings.filter(x=>(!st||(x.state||"").toLowerCase()===st)&&(!city||(x.city||"").toLowerCase().includes(city))&&(!area||(x.area||"").toLowerCase().includes(area))&&(!pin||(x.pin||"")===pin));
+$("resultCount").textContent=rows.length;
+$("listings").innerHTML=rows.length?rows.map(x=>`<div class="listing"><h3>${esc(x.type||"Room")} - ${esc(x.city||"")}</h3><span class="badge">${esc(x.forWho||"Anyone")}</span><span class="badge">${esc(x.sharing||"Single")}</span><div class="meta"><b>State:</b> ${esc(x.state||"")}<br><b>Area:</b> ${esc(x.area||"")} &nbsp; <b>PIN:</b> ${esc(x.pin||"")}<br><b>Owner:</b> ${esc(x.ownerName||"")}<br><b>Mobile:</b> ${esc(x.ownerMobile||"")}${x.details?`<br><b>Details:</b> ${esc(x.details)}`:""}</div><div class="actions">${x.ownerMobile?`<a class="btn" href="tel:${x.ownerMobile}">Call</a><a class="btn" href="https://wa.me/91${x.ownerMobile}" target="_blank">WhatsApp</a>`:""}${x.map?`<a class="btn" href="${safeUrl(x.map)}" target="_blank">Google Map</a>`:""}</div></div>`).join(""):"<p>No Room/PG found.</p>"}
+$("searchBtn").onclick=renderListings;
+$("clearSearch").onclick=()=>{$("searchState").value="";$("searchCity").value="";$("searchArea").value="";$("searchPin").value="";renderListings()};
+$("showRegister").onclick=()=>{$("loginBox").classList.add("hidden");$("registerBox").classList.remove("hidden")};
+$("backLogin").onclick=()=>{$("registerBox").classList.add("hidden");$("loginBox").classList.remove("hidden")};
+$("registerBtn").onclick=async()=>{
+const name=$("regName").value.trim(),mobile=cleanMobile($("regMobile").value),pin=$("regPin").value,pin2=$("regPin2").value;
+if(!name||mobile.length!==10||!validPin(pin)||pin!==pin2)return alert("Enter owner name, valid 10-digit mobile and matching 6-digit PIN.");
+try{const ref=db.collection("owners").doc(mobile),old=await ref.get();if(old.exists)return alert("This mobile number is already registered.");const pinHash=await sha256(pin);await ref.set({ownerName:name,mobile,pinHash,createdAt:firebase.firestore.FieldValue.serverTimestamp()});owner={ownerName:name,mobile};localStorage.setItem("wmr_owner",JSON.stringify(owner));showOwner();alert("Owner account created.")}catch(e){alert("Account creation failed: "+e.message)}};
+$("loginBtn").onclick=async()=>{
+const mobile=cleanMobile($("loginMobile").value),pin=$("loginPin").value;
+if(mobile.length!==10||!validPin(pin))return alert("Enter 10-digit mobile and 6-digit PIN.");
+try{const doc=await db.collection("owners").doc(mobile).get();if(!doc.exists)return alert("Owner account not found.");const h=await sha256(pin);if(doc.data().pinHash!==h)return alert("Wrong 6-digit PIN.");owner={ownerName:doc.data().ownerName,mobile};localStorage.setItem("wmr_owner",JSON.stringify(owner));showOwner()}catch(e){alert("Login failed: "+e.message)}};
+function showOwner(){$("loginBox").classList.add("hidden");$("registerBox").classList.add("hidden");$("ownerPanel").classList.remove("hidden");$("ownerWelcome").textContent="Welcome, "+owner.ownerName+" ("+owner.mobile+")"}
+$("logoutBtn").onclick=()=>{owner=null;localStorage.removeItem("wmr_owner");$("ownerPanel").classList.add("hidden");$("loginBox").classList.remove("hidden");$("addCard").classList.add("hidden")};
+$("addBtn").onclick=()=>{$("addCard").classList.remove("hidden");window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})};
+$("cancelAdd").onclick=()=>$("addCard").classList.add("hidden");
+$("saveBtn").onclick=async()=>{
+if(!owner)return alert("Owner login required.");
+const data={type:$("type").value,forWho:$("forWho").value,sharing:$("sharing").value,state:$("state").value,city:$("city").value.trim(),area:$("area").value.trim(),pin:$("pin").value.trim(),map:$("map").value.trim(),details:$("details").value.trim(),ownerName:owner.ownerName,ownerMobile:owner.mobile,createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+if(!data.state||!data.city||!data.area||!/^\d{6}$/.test(data.pin))return alert("State, City/District, Area/Block and valid 6-digit PIN are required.");
+if(data.map){try{const u=new URL(data.map);if(!/^https?:$/.test(u.protocol))throw 0}catch{return alert("Please enter a valid Google Maps link.")}}
+try{await db.collection("listings").add(data);alert("Room/PG saved successfully.");$("addCard").classList.add("hidden");["city","area","pin","map","details"].forEach(id=>$(id).value="");await loadListings()}catch(e){alert("Save failed: "+e.message)}};
+try{owner=JSON.parse(localStorage.getItem("wmr_owner")||"null");if(owner)showOwner()}catch{}
+loadListings();
 </script>
-
-<script>
-window.addEventListener("firebase-ready", () => {
-  const el = document.getElementById("firebaseStatus");
-  const notice = document.getElementById("appNotice");
-  if (el) {
-    el.textContent = window.firebaseReady
-      ? "Firebase: Connected ✓"
-      : "Firebase: Not configured";
-  }
-  if (notice) {
-    notice.textContent = window.firebaseReady
-      ? "Add Room is ready. Fill the form and tap Publish Listing."
-      : "If this page is opened in a file preview that blocks JavaScript, open it in Chrome or a web host.";
-  }
-});
-</script>
-
 </body>
 </html>
