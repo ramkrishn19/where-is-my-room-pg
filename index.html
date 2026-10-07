@@ -70,12 +70,12 @@ input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;
     <label>Owner Mobile Number</label>
     <input id="ownerPhone" type="tel" inputmode="tel" required placeholder="+91 9876543210">
     <button id="sendOtp" class="btn primary" type="button">Send OTP</button>
+    <div id="recaptcha-container"></div>
     <div id="otpArea" class="hidden">
       <label>OTP</label>
       <input id="ownerOtp" type="tel" inputmode="numeric" maxlength="6" placeholder="Enter 6 digit OTP">
       <button id="verifyOtp" class="btn blue" type="button" style="width:100%;margin-top:10px">Verify OTP & Login</button>
     </div>
-    <div id="recaptcha-container" style="margin-top:10px"></div>
     <button id="authBack" class="btn cancel" type="button">Back to Rooms</button>
     <div id="authMessage" class="small" style="margin-top:8px"></div>
   </section>
@@ -476,20 +476,30 @@ function wireAppButtons() {
     const phone = $("ownerPhone").value.trim();
     const msg = $("authMessage");
     try {
-      let normalized = phone.replace(/[-()\s]/g, "");
-      if (/^[6-9]\d{9}$/.test(normalized)) normalized = "+91" + normalized;
+      const normalized = phone.replace(/[-()\s]/g, "");
       if (!/^\+91[6-9]\d{9}$/.test(normalized)) {
-        throw new Error("Please enter a valid 10 digit Indian mobile number.");
+        throw new Error("Please enter a valid Indian mobile number with +91.");
       }
       msg.textContent = "Sending OTP...";
-      if (!window.phoneRecaptcha) {
-        window.phoneRecaptcha = new window.firebaseRecaptchaVerifier(
-          window.firebaseAuth,
-          "recaptcha-container",
-          {size: "invisible"}
-        );
-        await window.phoneRecaptcha.render();
+      if (!window.firebaseAuth) {
+        throw new Error("Firebase Authentication is not ready. Please refresh the page and try again.");
       }
+
+      // Use a dedicated reCAPTCHA container so it is never rendered twice
+      // inside the Send OTP button.
+      if (window.phoneRecaptcha) {
+        try { window.phoneRecaptcha.clear(); } catch (_) {}
+        window.phoneRecaptcha = null;
+      }
+
+      window.phoneRecaptcha = new window.firebaseRecaptchaVerifier(
+        window.firebaseAuth,
+        "recaptcha-container",
+        {size: "invisible"}
+      );
+
+      await window.phoneRecaptcha.render();
+
       window.confirmationResult = await window.firebaseSignInWithPhoneNumber(
         window.firebaseAuth, normalized, window.phoneRecaptcha
       );
@@ -512,6 +522,7 @@ function wireAppButtons() {
       msg.textContent = "Verifying OTP...";
       await window.confirmationResult.confirm(otp);
       msg.textContent = "Mobile number verified successfully.";
+      try { if (window.phoneRecaptcha) { window.phoneRecaptcha.clear(); window.phoneRecaptcha = null; } } catch (_) {}
       showOwner();
     } catch (e) {
       console.error(e);
